@@ -15,57 +15,356 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Application data models (not auth-related)
-model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String   // References Better Auth user ID (not a Prisma relation)
-  slug      String   @unique
-  tags      String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  comments  Comment[]
-}
-
-model Comment {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  content   String
-  authorId  String   // References Better Auth user ID
-  postId    String   @db.ObjectId
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Category {
+// Investor management for pitch deck
+model Investor {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String   @unique
-  description String?
-  color       String?  @default("#3b82f6")
+  name        String
+  email       String   @unique
+  company     String?
+  title       String?
+  phone       String?
+  status      InvestorStatus @default(INTERESTED)
+  source      String?  // How they found us (referral, website, etc.)
+  lastContact DateTime?
+  nextFollowUp DateTime?
+  notes       String?
+  tags        String[]
+  
+  // Investment details
+  investmentRange String? // e.g., "$100K-$500K"
+  focusAreas     String[] // e.g., ["AI/ML", "B2B SaaS", "Healthcare"]
+  
+  // Interaction tracking
+  meetings    Meeting[]
+  demos       DemoSession[]
+  documents   DocumentShare[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String   // Better Auth user ID
+}
+
+enum InvestorStatus {
+  INTERESTED
+  MEETING_SCHEDULED
+  DEMO_COMPLETED
+  DUE_DILIGENCE
+  TERM_SHEET
+  FOLLOW_UP
+  DECLINED
+  INVESTED
+}
+
+// Meeting tracking
+model Meeting {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  investorId  String   @db.ObjectId
+  investor    Investor @relation(fields: [investorId], references: [id], onDelete: Cascade)
+  
+  title       String
+  type        MeetingType
+  scheduledAt DateTime
+  duration    Int      // minutes
+  location    String?  // Zoom link, office address, etc.
+  status      MeetingStatus @default(SCHEDULED)
+  
+  // Meeting outcomes
+  notes       String?
+  nextSteps   String[]
+  followUpDate DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String   // Better Auth user ID
+}
+
+enum MeetingType {
+  INITIAL_PITCH
+  DEMO
+  DUE_DILIGENCE
+  FOLLOW_UP
+  TERM_DISCUSSION
+}
+
+enum MeetingStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+// Demo session tracking
+model DemoSession {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  investorId  String?  @db.ObjectId
+  investor    Investor? @relation(fields: [investorId], references: [id], onDelete: SetNull)
+  
+  demoId      String   @db.ObjectId
+  demo        Demo     @relation(fields: [demoId], references: [id], onDelete: Cascade)
+  
+  // Session details
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+  duration    Int?     // seconds
+  completed   Boolean  @default(false)
+  
+  // Interaction data
+  stepsCompleted String[] // Which demo steps were completed
+  userInputs     Json?    // Captured user inputs during demo
+  feedback       String?
+  rating         Int?     // 1-5 rating
+  
+  // Technical details
+  ipAddress   String?
+  userAgent   String?
+  referrer    String?
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-// Example model for user preferences (linked to Better Auth users)
-model UserPreference {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String   @unique // Better Auth user ID
-  theme             String   @default("light") // "light" | "dark" | "system"
-  emailNotifications Boolean  @default(true)
-  language          String   @default("en")
-  timezone          String   @default("UTC")
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+// Demo configurations
+model Demo {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  category    String   // e.g., "Restaurant", "Medical", "Legal"
+  
+  // Demo content
+  steps       Json     // Demo flow configuration
+  templates   String[] // Template IDs used in demo
+  features    String[] // Features showcased
+  
+  // Analytics
+  totalViews     Int @default(0)
+  totalCompletions Int @default(0)
+  averageRating  Float?
+  
+  // Configuration
+  isActive    Boolean  @default(true)
+  isPublic    Boolean  @default(false)
+  
+  // Relations
+  sessions    DemoSession[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String   // Better Auth user ID
 }
 
-// Example model for application settings
+// Business metrics tracking
+model Metric {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   // e.g., "Monthly Signups", "Revenue", "Churn Rate"
+  category    MetricCategory
+  value       Float
+  unit        String?  // e.g., "USD", "%", "count"
+  
+  // Time period
+  period      String   // e.g., "2024-01", "2024-Q1", "2024"
+  periodType  PeriodType
+  
+  // Comparison data
+  previousValue Float?
+  changePercent Float?
+  target        Float?
+  
+  // Metadata
+  source      String?  // Where the data comes from
+  notes       String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  recordedBy  String   // Better Auth user ID
+}
+
+enum MetricCategory {
+  REVENUE
+  USERS
+  PRODUCT
+  MARKETING
+  OPERATIONS
+}
+
+enum PeriodType {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+// Feedback and testimonials
+model Feedback {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  source      FeedbackSource
+  category    FeedbackCategory
+  
+  // Content
+  title       String?
+  message     String
+  rating      Int?     // 1-5 rating
+  
+  // Source details
+  authorName  String?
+  authorEmail String?
+  authorTitle String?
+  company     String?
+  
+  // Context
+  demoId      String?  @db.ObjectId
+  investorId  String?  @db.ObjectId
+  
+  // Status
+  isPublic    Boolean  @default(false)
+  isApproved  Boolean  @default(false)
+  
+  // Metadata
+  tags        String[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum FeedbackSource {
+  DEMO_USER
+  INVESTOR
+  BETA_TESTER
+  CUSTOMER
+  PARTNER
+  INTERNAL
+}
+
+enum FeedbackCategory {
+  PRODUCT
+  DEMO
+  PITCH
+  SUPPORT
+  FEATURE_REQUEST
+  BUG_REPORT
+  GENERAL
+}
+
+// Lead capture and management
+model Lead {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  email       String   @unique
+  name        String?
+  company     String?
+  title       String?
+  phone       String?
+  
+  // Lead source
+  source      String   // e.g., "landing_page", "demo", "referral"
+  campaign    String?  // Marketing campaign ID
+  referrer    String?  // Referring URL
+  
+  // Lead qualification
+  status      LeadStatus @default(NEW)
+  score       Int?     // Lead scoring (1-100)
+  interests   String[] // Areas of interest
+  
+  // Interaction history
+  lastActivity DateTime?
+  touchpoints  Int @default(1) // Number of interactions
+  
+  // Conversion tracking
+  convertedAt    DateTime?
+  convertedTo    String?   // What they converted to (trial, demo, meeting)
+  
+  // Notes and tags
+  notes       String?
+  tags        String[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  assignedTo  String?  // Better Auth user ID
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  DEMO_SCHEDULED
+  PROPOSAL_SENT
+  NEGOTIATING
+  CONVERTED
+  LOST
+}
+
+// Document sharing for investors
+model DocumentShare {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  investorId  String   @db.ObjectId
+  investor    Investor @relation(fields: [investorId], references: [id], onDelete: Cascade)
+  
+  // Document details
+  title       String
+  description String?
+  documentType DocumentType
+  fileUrl     String?  // URL to document (if file)
+  content     Json?    // Structured content (if not file)
+  
+  // Access control
+  isPasswordProtected Boolean @default(false)
+  password    String?
+  expiresAt   DateTime?
+  
+  // Tracking
+  viewCount   Int @default(0)
+  lastViewedAt DateTime?
+  downloadCount Int @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  sharedBy    String   // Better Auth user ID
+}
+
+enum DocumentType {
+  PITCH_DECK
+  FINANCIAL_PROJECTIONS
+  PRODUCT_DEMO
+  MARKET_ANALYSIS
+  TEAM_BIOS
+  LEGAL_DOCS
+  TECHNICAL_SPECS
+  CUSTOMER_TESTIMONIALS
+}
+
+// Application settings and configuration
 model AppSetting {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   key       String   @unique
   value     String
   type      String   @default("string") // "string" | "number" | "boolean" | "json"
+  category  String   @default("general") // "general" | "demo" | "email" | "analytics"
+  description String?
+  isPublic  Boolean  @default(false) // Can be accessed by frontend
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// User preferences (linked to Better Auth users)
+model UserPreference {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @unique // Better Auth user ID
+  
+  // Dashboard preferences
+  theme             String   @default("light") // "light" | "dark" | "system"
+  dashboardLayout   String   @default("default")
+  
+  // Notification preferences
+  emailNotifications Boolean  @default(true)
+  demoAlerts        Boolean  @default(true)
+  investorUpdates   Boolean  @default(true)
+  weeklyReports     Boolean  @default(true)
+  
+  // Display preferences
+  timezone          String   @default("UTC")
+  dateFormat        String   @default("MM/DD/YYYY")
+  currency          String   @default("USD")
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }

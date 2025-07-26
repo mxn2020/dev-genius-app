@@ -6,24 +6,16 @@ import {
   Code, 
   Globe, 
   Users, 
-  Star, 
   User, 
   Play, 
   ArrowRight, 
   CheckCircle, 
   TrendingUp, 
-  DollarSign, 
-  Clock, 
-  Smartphone, 
-  Database, 
-  Cloud,
   Mail,
   Calendar,
-  BarChart3,
   Target,
   Lightbulb,
   Rocket,
-  Shield,
   Settings
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -33,42 +25,42 @@ import type { ComponentRegistryId } from '../registry/componentRegistry';
 
 // Helper functions for type-safe dynamic IDs
 const getProblemCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['problem-card-0', 'problem-card-1', 'problem-card-2'];
+  const ids: ComponentRegistryId[] = ['landing-problem-card-0', 'landing-problem-card-1', 'landing-problem-card-2'];
   return ids[index] || 'noID';
 };
 
 const getSolutionStepId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['solution-step-0', 'solution-step-1', 'solution-step-2', 'solution-step-3'];
+  const ids: ComponentRegistryId[] = ['landing-solution-step-0', 'landing-solution-step-1', 'landing-solution-step-2', 'landing-solution-step-3'];
   return ids[index] || 'noID';
 };
 
 const getFeatureCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['feature-card-0', 'feature-card-1', 'feature-card-2'];
+  const ids: ComponentRegistryId[] = ['landing-feature-card-0', 'landing-feature-card-1', 'landing-feature-card-2'];
   return ids[index] || 'noID';
 };
 
 const getComponentId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['component-0', 'component-1', 'component-2', 'component-3'];
+  const ids: ComponentRegistryId[] = ['landing-component-0', 'landing-component-1', 'landing-component-2', 'landing-component-3'];
   return ids[index] || 'noID';
 };
 
 const getIndustryCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['industry-card-0', 'industry-card-1', 'industry-card-2', 'industry-card-3', 'industry-card-4'];
+  const ids: ComponentRegistryId[] = ['landing-industry-card-0', 'landing-industry-card-1', 'landing-industry-card-2', 'landing-industry-card-3', 'landing-industry-card-4'];
   return ids[index] || 'noID';
 };
 
 const getPricingCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['pricing-card-0', 'pricing-card-1', 'pricing-card-2'];
+  const ids: ComponentRegistryId[] = ['landing-pricing-card-0', 'landing-pricing-card-1', 'landing-pricing-card-2'];
   return ids[index] || 'noID';
 };
 
 const getMetricCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['metric-card-0', 'metric-card-1', 'metric-card-2', 'metric-card-3'];
+  const ids: ComponentRegistryId[] = ['landing-metric-card-0', 'landing-metric-card-1', 'landing-metric-card-2', 'landing-metric-card-3'];
   return ids[index] || 'noID';
 };
 
 const getTeamMemberId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['team-member-0', 'team-member-1', 'team-member-2', 'team-member-3'];
+  const ids: ComponentRegistryId[] = ['landing-team-member-0', 'landing-team-member-1', 'landing-team-member-2', 'landing-team-member-3'];
   return ids[index] || 'noID';
 };
 
@@ -79,7 +71,7 @@ export const Landing: React.FC = () => {
   const [selectedIndustry, setSelectedIndustry] = useState(0);
   const [isAnnual, setIsAnnual] = useState(false);
   const [email, setEmail] = useState('');
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     setMounted(true);
@@ -306,35 +298,35 @@ export const Landing: React.FC = () => {
   ];
 
   return (
-    <Container componentId="geenius-pitch-deck">
-      <Div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <Container componentId="landing-page">
+      <Div devId="landing-wrapper" devName="Landing Wrapper" devDescription="Main landing page wrapper" className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
         
         {/* Header */}
         <Header 
-          devId="pitch-header" 
-          devName="Pitch Header" 
+          devId="landing-header" 
+          devName="Landing Header" 
           devDescription="Main header with navigation and progress indicator"
           className="fixed top-0 w-full bg-black/20 backdrop-blur-md z-50 border-b border-white/10"
         >
-          <Nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Div className="flex items-center space-x-3">
-              <Div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+          <Nav devId="landing-nav" devName="Landing Navigation" devDescription="Main navigation bar" className="container mx-auto px-4 py-4 flex items-center justify-between">
+            <Div devId="brand-section" devName="Brand Section" devDescription="Brand logo and name section" className="flex items-center space-x-3">
+              <Div devId="brand-logo" devName="Brand Logo" devDescription="Geenius Interactive brand logo" className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
                 <Zap className="w-6 h-6 text-white" />
               </Div>
               <Span 
-                devId="geenius-brand" 
-                devName="Geenius Brand" 
+                devId="brand-name" 
+                devName="Brand Name" 
                 devDescription="Geenius Interactive brand name"
                 className="text-2xl font-bold text-white"
               >
                 Geenius Interactive
               </Span>
             </Div>
-            <Div className="flex items-center space-x-4">
+            <Div devId="nav-buttons" devName="Navigation Buttons" devDescription="Navigation buttons section" className="flex items-center space-x-4">
               {isAuthenticated ? (
                 <Link to="/dashboard">
                   <Button 
-                    devId="nav-dashboard-btn"
+                    devId="nav-dashboard-button"
                     devName="Dashboard Button"
                     devDescription="Navigation button to dashboard"
                     className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg"
@@ -346,7 +338,7 @@ export const Landing: React.FC = () => {
                 <>
                   <Link to="/login">
                     <Button 
-                      devId="nav-login-btn"
+                      devId="nav-login-button"
                       devName="Login Button"
                       devDescription="Navigation login button"
                       variant="ghost" 
@@ -357,7 +349,7 @@ export const Landing: React.FC = () => {
                   </Link>
                   <Link to="/register">
                     <Button 
-                      devId="nav-register-btn"
+                      devId="nav-register-button"
                       devName="Register Button"
                       devDescription="Navigation register button"
                       className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg"
@@ -373,22 +365,22 @@ export const Landing: React.FC = () => {
 
         {/* Hero Section */}
         <Container componentId="hero-section">
-          <Section className="pt-32 pb-20 px-4">
-            <Div className="container mx-auto text-center">
+          <Section devId="hero-section-content" devName="Hero Section Content" devDescription="Main hero section content" className="pt-32 pb-20 px-4">
+            <Div devId="hero-container" devName="Hero Container" devDescription="Hero section container" className="container mx-auto text-center">
               <H1 
-                devId="hero-headline" 
-                devName="Hero Headline" 
+                devId="hero-title" 
+                devName="Hero Title" 
                 devDescription="Main hero headline"
                 className="text-6xl md:text-8xl font-bold text-white mb-6"
               >
                 From Idea to Live App
-                <Span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <Span devId="hero-highlight" devName="Hero Highlight" devDescription="Highlighted text in hero title" className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   {' '}in Minutes
                 </Span>
               </H1>
               <P 
-                devId="hero-subheadline" 
-                devName="Hero Subheadline" 
+                devId="hero-subtitle" 
+                devName="Hero Subtitle" 
                 devDescription="Hero subheadline description"
                 className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto"
               >
@@ -397,15 +389,15 @@ export const Landing: React.FC = () => {
               
               {/* Interactive Demo Input */}
               <Div 
-                devId="demo-input-section" 
-                devName="Demo Input Section" 
+                devId="demo-input-container" 
+                devName="Demo Input Container" 
                 devDescription="Interactive demo input area"
                 className="max-w-2xl mx-auto mb-12"
               >
-                <Div className="relative">
+                <Div devId="demo-input-wrapper" devName="Demo Input Wrapper" devDescription="Demo input wrapper with button" className="relative">
                   <Input
-                    devId="demo-input"
-                    devName="Demo Input"
+                    devId="demo-input-field"
+                    devName="Demo Input Field"
                     devDescription="Live demo input box"
                     placeholder={typingText}
                     value={currentDemo}
@@ -413,7 +405,7 @@ export const Landing: React.FC = () => {
                     className="w-full px-6 py-4 text-lg bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-gray-400"
                   />
                   <Button 
-                    devId="demo-try-btn"
+                    devId="demo-try-button"
                     devName="Try Demo Button"
                     devDescription="Button to try the demo"
                     className="absolute right-2 top-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg"
@@ -425,7 +417,7 @@ export const Landing: React.FC = () => {
               </Div>
 
               <Button 
-                devId="hero-cta-btn"
+                devId="hero-cta-buttons"
                 devName="Hero CTA Button"
                 devDescription="Main hero call-to-action button"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-12 py-4 rounded-xl text-xl font-semibold transform hover:scale-105 transition-all"
@@ -438,18 +430,18 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Problem Section */}
-        <Container componentId="problem-section">
-          <Section className="py-20 px-4 bg-black/20">
-            <Div className="container mx-auto">
+        <Container componentId="landing-problem-section">
+          <Section devId="problem-section-content" devName="Problem Section Content" devDescription="Problem section content" className="py-20 px-4 bg-black/20">
+            <Div devId="problem-container" devName="Problem Container" devDescription="Problem section container" className="container mx-auto">
               <H2 
-                devId="problem-title" 
-                devName="Problem Title" 
+                devId="problem-section-title" 
+                devName="Problem Section Title" 
                 devDescription="Problem section title"
                 className="text-5xl font-bold text-white text-center mb-16"
               >
                 The Problem
               </H2>
-              <Div className="grid md:grid-cols-3 gap-8">
+              <Div devId="problem-cards-grid" devName="Problem Cards Grid" devDescription="Grid of problem cards" className="grid md:grid-cols-3 gap-8">
                 {problems.map((problem, index) => (
                   <Card 
                     key={index}
@@ -458,29 +450,29 @@ export const Landing: React.FC = () => {
                     devDescription={`Problem card for ${problem.title}`}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-red-500/50 transition-all"
                   >
-                    <Div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${problem.image})`}} />
-                    <CardContent className="p-6">
-                      <H3 className="text-xl font-semibold text-white mb-3">{problem.title}</H3>
-                      <P className="text-gray-300">{problem.pain}</P>
+                    <Div devId={`problem-image-${index}`} devName={`Problem Image ${index}`} devDescription={`Problem image for ${problem.title}`} className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${problem.image})`}} />
+                    <CardContent devId={`problem-content-${index}`} devName={`Problem Content ${index}`} devDescription={`Problem content for ${problem.title}`} className="p-6">
+                      <H3 devId={`problem-title-${index}`} devName={`Problem Title ${index}`} devDescription={`Problem title for ${problem.title}`} className="text-xl font-semibold text-white mb-3">{problem.title}</H3>
+                      <P devId={`problem-description-${index}`} devName={`Problem Description ${index}`} devDescription={`Problem description for ${problem.title}`} className="text-gray-300">{problem.pain}</P>
                     </CardContent>
                   </Card>
                 ))}
               </Div>
               <Div 
-                devId="problem-stats" 
-                devName="Problem Stats" 
+                devId="problem-statistics" 
+                devName="Problem Statistics" 
                 devDescription="Problem statistics section"
                 className="text-center mt-12"
               >
-                <P className="text-gray-300 text-lg mb-4">Average custom development costs:</P>
-                <Div className="flex justify-center space-x-8">
-                  <Div className="text-center">
-                    <Div className="text-3xl font-bold text-red-400">$75,000</Div>
-                    <Div className="text-gray-400">Average Cost</Div>
+                <P devId="problem-stats-intro" devName="Problem Stats Intro" devDescription="Introduction to problem statistics" className="text-gray-300 text-lg mb-4">Average custom development costs:</P>
+                <Div devId="problem-stats-grid" devName="Problem Stats Grid" devDescription="Grid of problem statistics" className="flex justify-center space-x-8">
+                  <Div devId="average-cost-stat" devName="Average Cost Stat" devDescription="Average cost statistic" className="text-center">
+                    <Div devId="average-cost-value" devName="Average Cost Value" devDescription="Average cost value" className="text-3xl font-bold text-red-400">$75,000</Div>
+                    <Div devId="average-cost-label" devName="Average Cost Label" devDescription="Average cost label" className="text-gray-400">Average Cost</Div>
                   </Div>
-                  <Div className="text-center">
-                    <Div className="text-3xl font-bold text-red-400">8 months</Div>
-                    <Div className="text-gray-400">Development Time</Div>
+                  <Div devId="development-time-stat" devName="Development Time Stat" devDescription="Development time statistic" className="text-center">
+                    <Div devId="development-time-value" devName="Development Time Value" devDescription="Development time value" className="text-3xl font-bold text-red-400">8 months</Div>
+                    <Div devId="development-time-label" devName="Development Time Label" devDescription="Development time label" className="text-gray-400">Development Time</Div>
                   </Div>
                 </Div>
               </Div>
@@ -489,18 +481,18 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Solution Section */}
-        <Container componentId="solution-section">
-          <Section className="py-20 px-4">
-            <Div className="container mx-auto">
+        <Container componentId="landing-solution-section">
+          <Section devId="solution-section-content" devName="Solution Section Content" devDescription="Solution section content" className="py-20 px-4">
+            <Div devId="solution-container" devName="Solution Container" devDescription="Solution section container" className="container mx-auto">
               <H2 
-                devId="solution-title" 
-                devName="Solution Title" 
+                devId="solution-section-title" 
+                devName="Solution Section Title" 
                 devDescription="Solution section title"
                 className="text-5xl font-bold text-white text-center mb-16"
               >
                 The Solution
               </H2>
-              <Div className="grid md:grid-cols-4 gap-8">
+              <Div devId="solution-steps-grid" devName="Solution Steps Grid" devDescription="Grid of solution steps" className="grid md:grid-cols-4 gap-8">
                 {solutionSteps.map((step, index) => (
                   <Card 
                     key={index}
@@ -509,12 +501,12 @@ export const Landing: React.FC = () => {
                     devDescription={`Solution step ${step.step}: ${step.title}`}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:border-green-500/50 transition-all cursor-pointer"
                   >
-                    <Div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-                      <Span className="text-white font-bold text-xl">{step.step}</Span>
+                    <Div devId={`solution-step-number-${index}`} devName={`Solution Step Number ${index}`} devDescription={`Step number for solution step ${step.step}`} className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                      <Span devId={`solution-step-text-${index}`} devName={`Solution Step Text ${index}`} devDescription={`Step text for solution step ${step.step}`} className="text-white font-bold text-xl">{step.step}</Span>
                     </Div>
-                    <Div className="mb-4">{step.icon}</Div>
-                    <H3 className="text-xl font-semibold text-white mb-3">{step.title}</H3>
-                    <P className="text-gray-300">{step.description}</P>
+                    <Div devId={`solution-step-icon-${index}`} devName={`Solution Step Icon ${index}`} devDescription={`Icon for solution step ${step.step}`} className="mb-4">{step.icon}</Div>
+                    <H3 devId={`solution-step-title-${index}`} devName={`Solution Step Title ${index}`} devDescription={`Title for solution step ${step.step}`} className="text-xl font-semibold text-white mb-3">{step.title}</H3>
+                    <P devId={`solution-step-description-${index}`} devName={`Solution Step Description ${index}`} devDescription={`Description for solution step ${step.step}`} className="text-gray-300">{step.description}</P>
                   </Card>
                 ))}
               </Div>
@@ -523,18 +515,18 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Core Features Section */}
-        <Container componentId="features-section">
-          <Section className="py-20 px-4 bg-black/20">
-            <Div className="container mx-auto">
+        <Container componentId="landing-features-section">
+          <Section devId="features-section-content" devName="Features Section Content" devDescription="Features section content" className="py-20 px-4 bg-black/20">
+            <Div devId="features-container" devName="Features Container" devDescription="Features section container" className="container mx-auto">
               <H2 
-                devId="features-title" 
-                devName="Features Title" 
+                devId="features-section-title" 
+                devName="Features Section Title" 
                 devDescription="Core features section title"
                 className="text-5xl font-bold text-white text-center mb-16"
               >
                 Core Features
               </H2>
-              <Div className="grid md:grid-cols-3 gap-8">
+              <Div devId="features-cards-grid" devName="Features Cards Grid" devDescription="Grid of feature cards" className="grid md:grid-cols-3 gap-8">
                 {features.map((feature, index) => (
                   <Card 
                     key={index}
@@ -543,11 +535,11 @@ export const Landing: React.FC = () => {
                     devDescription={`Feature card for ${feature.title}`}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:border-purple-500/50 transition-all"
                   >
-                    <Div className="mb-6">{feature.icon}</Div>
-                    <H3 className="text-2xl font-semibold text-white mb-4">{feature.title}</H3>
-                    <P className="text-gray-300 mb-6">{feature.description}</P>
-                    <Div className="bg-purple-900/30 rounded-lg p-4 border border-purple-500/30">
-                      <P className="text-purple-300 text-sm">{feature.demo}</P>
+                    <Div devId={`feature-icon-${index}`} devName={`Feature Icon ${index}`} devDescription={`Icon for feature ${feature.title}`} className="mb-6">{feature.icon}</Div>
+                    <H3 devId={`feature-title-${index}`} devName={`Feature Title ${index}`} devDescription={`Title for feature ${feature.title}`} className="text-2xl font-semibold text-white mb-4">{feature.title}</H3>
+                    <P devId={`feature-description-${index}`} devName={`Feature Description ${index}`} devDescription={`Description for feature ${feature.title}`} className="text-gray-300 mb-6">{feature.description}</P>
+                    <Div devId={`feature-demo-${index}`} devName={`Feature Demo ${index}`} devDescription={`Demo text for feature ${feature.title}`} className="bg-purple-900/30 rounded-lg p-4 border border-purple-500/30">
+                      <P devId={`feature-demo-text-${index}`} devName={`Feature Demo Text ${index}`} devDescription={`Demo text content for feature ${feature.title}`} className="text-purple-300 text-sm">{feature.demo}</P>
                     </Div>
                   </Card>
                 ))}
@@ -557,18 +549,18 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Platform Components Section */}
-        <Container componentId="components-section">
-          <Section className="py-20 px-4">
-            <Div className="container mx-auto text-center">
+        <Container componentId="landing-components-section">
+          <Section devId="components-section-content" devName="Components Section Content" devDescription="Components section content" className="py-20 px-4">
+            <Div devId="components-container" devName="Components Container" devDescription="Components section container" className="container mx-auto text-center">
               <H2 
-                devId="components-title" 
-                devName="Components Title" 
+                devId="components-section-title" 
+                devName="Components Section Title" 
                 devDescription="Platform components section title"
                 className="text-5xl font-bold text-white mb-16"
               >
                 Platform Ecosystem
               </H2>
-              <Div className="grid md:grid-cols-4 gap-8">
+              <Div devId="components-cards-grid" devName="Components Cards Grid" devDescription="Grid of component cards" className="grid md:grid-cols-4 gap-8">
                 {components.map((component, index) => (
                   <Card 
                     key={index}
@@ -577,9 +569,9 @@ export const Landing: React.FC = () => {
                     devDescription={`Platform component: ${component.name}`}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-blue-500/50 transition-all cursor-pointer"
                   >
-                    <Div className="text-4xl font-bold text-blue-400 mb-2">{component.count}</Div>
-                    <H3 className="text-xl font-semibold text-white mb-3">{component.name}</H3>
-                    <P className="text-gray-300">{component.description}</P>
+                    <Div devId={`component-count-${index}`} devName={`Component Count ${index}`} devDescription={`Count for component ${component.name}`} className="text-4xl font-bold text-blue-400 mb-2">{component.count}</Div>
+                    <H3 devId={`component-name-${index}`} devName={`Component Name ${index}`} devDescription={`Name for component ${component.name}`} className="text-xl font-semibold text-white mb-3">{component.name}</H3>
+                    <P devId={`component-description-${index}`} devName={`Component Description ${index}`} devDescription={`Description for component ${component.name}`} className="text-gray-300">{component.description}</P>
                   </Card>
                 ))}
               </Div>
@@ -588,18 +580,18 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Target Market Section */}
-        <Container componentId="market-section">
-          <Section className="py-20 px-4 bg-black/20">
-            <Div className="container mx-auto">
+        <Container componentId="landing-market-section">
+          <Section devId="market-section-content" devName="Market Section Content" devDescription="Market section content" className="py-20 px-4 bg-black/20">
+            <Div devId="market-container" devName="Market Container" devDescription="Market section container" className="container mx-auto">
               <H2 
-                devId="market-title" 
-                devName="Market Title" 
+                devId="market-section-title" 
+                devName="Market Section Title" 
                 devDescription="Target market section title"
                 className="text-5xl font-bold text-white text-center mb-16"
               >
                 Target Market
               </H2>
-              <Div className="grid md:grid-cols-5 gap-6">
+              <Div devId="industry-cards-grid" devName="Industry Cards Grid" devDescription="Grid of industry cards" className="grid md:grid-cols-5 gap-6">
                 {industries.map((industry, index) => (
                   <Card 
                     key={index}
@@ -611,11 +603,11 @@ export const Landing: React.FC = () => {
                     }`}
                     onClick={() => setSelectedIndustry(index)}
                   >
-                    <Div className="h-32 bg-cover bg-center" style={{backgroundImage: `url(${industry.image})`}} />
-                    <CardContent className="p-4">
-                      <H3 className="text-lg font-semibold text-white mb-2">{industry.name}</H3>
-                      <P className="text-gray-300 text-sm mb-2">{industry.useCase}</P>
-                      <Badge className="bg-purple-600 text-white">{industry.marketSize}</Badge>
+                    <Div devId={`industry-image-${index}`} devName={`Industry Image ${index}`} devDescription={`Image for industry ${industry.name}`} className="h-32 bg-cover bg-center" style={{backgroundImage: `url(${industry.image})`}} />
+                    <CardContent devId={`industry-content-${index}`} devName={`Industry Content ${index}`} devDescription={`Content for industry ${industry.name}`} className="p-4">
+                      <H3 devId={`industry-name-${index}`} devName={`Industry Name ${index}`} devDescription={`Name for industry ${industry.name}`} className="text-lg font-semibold text-white mb-2">{industry.name}</H3>
+                      <P devId={`industry-usecase-${index}`} devName={`Industry Use Case ${index}`} devDescription={`Use case for industry ${industry.name}`} className="text-gray-300 text-sm mb-2">{industry.useCase}</P>
+                      <Badge devId={`industry-market-size-${index}`} devName={`Industry Market Size ${index}`} devDescription={`Market size for industry ${industry.name}`} className="bg-purple-600 text-white">{industry.marketSize}</Badge>
                     </CardContent>
                   </Card>
                 ))}
@@ -625,26 +617,26 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Business Model Section */}
-        <Container componentId="pricing-section">
-          <Section className="py-20 px-4">
-            <Div className="container mx-auto">
+        <Container componentId="landing-pricing-section">
+          <Section devId="pricing-section-content" devName="Pricing Section Content" devDescription="Pricing section content" className="py-20 px-4">
+            <Div devId="pricing-container" devName="Pricing Container" devDescription="Pricing section container" className="container mx-auto">
               <H2 
-                devId="pricing-title" 
-                devName="Pricing Title" 
+                devId="pricing-section-title" 
+                devName="Pricing Section Title" 
                 devDescription="Business model pricing section title"
                 className="text-5xl font-bold text-white text-center mb-8"
               >
                 Business Model
               </H2>
               <Div 
-                devId="pricing-toggle" 
-                devName="Pricing Toggle" 
+                devId="pricing-toggle-section" 
+                devName="Pricing Toggle Section" 
                 devDescription="Monthly/Annual pricing toggle"
                 className="flex justify-center mb-12"
               >
-                <Div className="bg-white/10 rounded-lg p-1 flex">
+                <Div devId="pricing-toggle-wrapper" devName="Pricing Toggle Wrapper" devDescription="Wrapper for pricing toggle buttons" className="bg-white/10 rounded-lg p-1 flex">
                   <Button 
-                    devId="monthly-btn"
+                    devId="pricing-monthly-button"
                     devName="Monthly Button"
                     devDescription="Monthly pricing button"
                     variant={!isAnnual ? "default" : "ghost"}
@@ -654,7 +646,7 @@ export const Landing: React.FC = () => {
                     Monthly
                   </Button>
                   <Button 
-                    devId="annual-btn"
+                    devId="pricing-annual-button"
                     devName="Annual Button"
                     devDescription="Annual pricing button"
                     variant={isAnnual ? "default" : "ghost"}
@@ -665,7 +657,7 @@ export const Landing: React.FC = () => {
                   </Button>
                 </Div>
               </Div>
-              <Div className="grid md:grid-cols-3 gap-8">
+              <Div devId="pricing-cards-grid" devName="Pricing Cards Grid" devDescription="Grid of pricing cards" className="grid md:grid-cols-3 gap-8">
                 {pricingPlans.map((plan, index) => (
                   <Card 
                     key={index}
@@ -677,23 +669,23 @@ export const Landing: React.FC = () => {
                     }`}
                   >
                     {plan.popular && (
-                      <Badge className="bg-purple-600 text-white mb-4">Most Popular</Badge>
+                      <Badge devId={`pricing-popular-badge-${index}`} devName={`Pricing Popular Badge ${index}`} devDescription={`Popular badge for ${plan.name} plan`} className="bg-purple-600 text-white mb-4">Most Popular</Badge>
                     )}
-                    <H3 className="text-2xl font-semibold text-white mb-4">{plan.name}</H3>
-                    <Div className="mb-6">
-                      <Span className="text-4xl font-bold text-white">${plan.price}</Span>
-                      <Span className="text-gray-300">/month</Span>
+                    <H3 devId={`pricing-plan-name-${index}`} devName={`Pricing Plan Name ${index}`} devDescription={`Plan name for ${plan.name}`} className="text-2xl font-semibold text-white mb-4">{plan.name}</H3>
+                    <Div devId={`pricing-plan-price-${index}`} devName={`Pricing Plan Price ${index}`} devDescription={`Price section for ${plan.name} plan`} className="mb-6">
+                      <Span devId={`pricing-plan-amount-${index}`} devName={`Pricing Plan Amount ${index}`} devDescription={`Price amount for ${plan.name} plan`} className="text-4xl font-bold text-white">${plan.price}</Span>
+                      <Span devId={`pricing-plan-period-${index}`} devName={`Pricing Plan Period ${index}`} devDescription={`Price period for ${plan.name} plan`} className="text-gray-300">/month</Span>
                     </Div>
-                    <Div className="space-y-3 mb-8">
+                    <Div devId={`pricing-plan-features-${index}`} devName={`Pricing Plan Features ${index}`} devDescription={`Features list for ${plan.name} plan`} className="space-y-3 mb-8">
                       {plan.features.map((feature, featureIndex) => (
-                        <Div key={featureIndex} className="flex items-center">
+                        <Div devId={`pricing-feature-${index}-${featureIndex}`} devName={`Pricing Feature ${index}-${featureIndex}`} devDescription={`Feature ${featureIndex} for ${plan.name} plan`} key={featureIndex} className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-400 mr-3" />
-                          <Span className="text-gray-300">{feature}</Span>
+                          <Span devId={`pricing-feature-text-${index}-${featureIndex}`} devName={`Pricing Feature Text ${index}-${featureIndex}`} devDescription={`Feature text ${featureIndex} for ${plan.name} plan`} className="text-gray-300">{feature}</Span>
                         </Div>
                       ))}
                     </Div>
                     <Button 
-                      devId={`pricing-cta-${index}`}
+                      devId={`pricing-cta-button-${index}`}
                       devName={`${plan.name} CTA Button`}
                       devDescription={`CTA button for ${plan.name} plan`}
                       className={`w-full py-3 ${
@@ -712,11 +704,11 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Demo Section */}
-        <Container componentId="demo-section">
-          <Section className="py-20 px-4 bg-black/20">
-            <Div className="container mx-auto text-center">
+        <Container componentId="hero-section">
+          <Section devId="demo-section-content" devName="Demo Section Content" devDescription="Demo section content" className="py-20 px-4 bg-black/20">
+            <Div devId="demo-container" devName="Demo Container" devDescription="Demo section container" className="container mx-auto text-center">
               <H2 
-                devId="demo-title" 
+                devId="hero-title" 
                 devName="Demo Title" 
                 devDescription="Demo section title"
                 className="text-5xl font-bold text-white mb-16"
@@ -724,17 +716,17 @@ export const Landing: React.FC = () => {
                 Live Demo
               </H2>
               <Div 
-                devId="demo-interface" 
-                devName="Demo Interface" 
+                devId="demo-interface-container" 
+                devName="Demo Interface Container" 
                 devDescription="Interactive demo interface"
                 className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8"
               >
-                <Div className="bg-black/50 rounded-lg p-6 mb-6">
-                  <P className="text-gray-300 mb-4">Try creating an app:</P>
-                  <Div className="grid md:grid-cols-3 gap-4">
+                <Div devId="demo-interface-content" devName="Demo Interface Content" devDescription="Demo interface content area" className="bg-black/50 rounded-lg p-6 mb-6">
+                  <P devId="demo-interface-intro" devName="Demo Interface Intro" devDescription="Demo interface introduction text" className="text-gray-300 mb-4">Try creating an app:</P>
+                  <Div devId="demo-buttons-grid" devName="Demo Buttons Grid" devDescription="Grid of demo buttons" className="grid md:grid-cols-3 gap-4">
                     <Button 
-                      devId="demo-restaurant"
-                      devName="Restaurant Demo"
+                      devId="demo-restaurant-button"
+                      devName="Restaurant Demo Button"
                       devDescription="Restaurant app demo button"
                       className="bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg"
                       onClick={() => setCurrentDemo("Restaurant menu and ordering system")}
@@ -742,8 +734,8 @@ export const Landing: React.FC = () => {
                       Restaurant App
                     </Button>
                     <Button 
-                      devId="demo-appointment"
-                      devName="Appointment Demo"
+                      devId="demo-appointment-button"
+                      devName="Appointment Demo Button"
                       devDescription="Appointment booking demo button"
                       className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg"
                       onClick={() => setCurrentDemo("Doctor appointment booking")}
@@ -751,8 +743,8 @@ export const Landing: React.FC = () => {
                       Booking System
                     </Button>
                     <Button 
-                      devId="demo-contact"
-                      devName="Contact Demo"
+                      devId="demo-contact-button"
+                      devName="Contact Demo Button"
                       devDescription="Contact management demo button"
                       className="bg-green-600 hover:bg-green-700 text-white p-4 rounded-lg"
                       onClick={() => setCurrentDemo("Contact management system")}
@@ -762,9 +754,9 @@ export const Landing: React.FC = () => {
                   </Div>
                 </Div>
                 {currentDemo && (
-                  <Div className="bg-green-900/30 border border-green-500/50 rounded-lg p-6">
-                    <P className="text-green-300">✓ App created: {currentDemo}</P>
-                    <P className="text-gray-300 mt-2">Ready to deploy in 30 seconds!</P>
+                  <Div devId="demo-result" devName="Demo Result" devDescription="Demo result display" className="bg-green-900/30 border border-green-500/50 rounded-lg p-6">
+                    <P devId="demo-result-text" devName="Demo Result Text" devDescription="Demo result text content" className="text-green-300">✓ App created: {currentDemo}</P>
+                    <P devId="demo-result-deploy" devName="Demo Result Deploy" devDescription="Demo result deployment message" className="text-gray-300 mt-2">Ready to deploy in 30 seconds!</P>
                   </Div>
                 )}
               </Div>
@@ -773,18 +765,18 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Traction & Metrics Section */}
-        <Container componentId="metrics-section">
-          <Section className="py-20 px-4">
-            <Div className="container mx-auto">
+        <Container componentId="landing-metrics-section">
+          <Section devId="metrics-section-content" devName="Metrics Section Content" devDescription="Metrics section content" className="py-20 px-4">
+            <Div devId="metrics-container" devName="Metrics Container" devDescription="Metrics section container" className="container mx-auto">
               <H2 
-                devId="metrics-title" 
-                devName="Metrics Title" 
+                devId="metrics-section-title" 
+                devName="Metrics Section Title" 
                 devDescription="Traction and metrics section title"
                 className="text-5xl font-bold text-white text-center mb-16"
               >
                 Traction & Metrics
               </H2>
-              <Div className="grid md:grid-cols-4 gap-8 mb-12">
+              <Div devId="metrics-cards-grid" devName="Metrics Cards Grid" devDescription="Grid of metric cards" className="grid md:grid-cols-4 gap-8 mb-12">
                 {metrics.map((metric, index) => (
                   <Card 
                     key={index}
@@ -793,9 +785,9 @@ export const Landing: React.FC = () => {
                     devDescription={`Metric card for ${metric.label}`}
                     className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center"
                   >
-                    <Div className="text-3xl font-bold text-white mb-2">{metric.value}</Div>
-                    <Div className="text-gray-300 mb-2">{metric.label}</Div>
-                    <Badge className="bg-green-600 text-white">
+                    <Div devId={`metric-value-${index}`} devName={`Metric Value ${index}`} devDescription={`Value for metric ${metric.label}`} className="text-3xl font-bold text-white mb-2">{metric.value}</Div>
+                    <Div devId={`metric-label-${index}`} devName={`Metric Label ${index}`} devDescription={`Label for metric ${metric.label}`} className="text-gray-300 mb-2">{metric.label}</Div>
+                    <Badge devId={`metric-growth-${index}`} devName={`Metric Growth ${index}`} devDescription={`Growth badge for metric ${metric.label}`} className="bg-green-600 text-white">
                       <TrendingUp className="w-3 h-3 mr-1" />
                       {metric.growth}
                     </Badge>
@@ -803,20 +795,20 @@ export const Landing: React.FC = () => {
                 ))}
               </Div>
               <Div 
-                devId="testimonials" 
-                devName="Testimonials" 
+                devId="testimonials-section" 
+                devName="Testimonials Section" 
                 devDescription="Customer testimonials section"
                 className="text-center"
               >
-                <H3 className="text-2xl font-semibold text-white mb-8">What Our Customers Say</H3>
-                <Div className="grid md:grid-cols-2 gap-8">
-                  <Card className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-                    <P className="text-gray-300 mb-4">"Geenius saved us $80,000 and 8 months of development time. Our restaurant app was live in 2 days!"</P>
-                    <P className="text-white font-semibold">- Maria Rodriguez, Restaurant Owner</P>
+                <H3 devId="testimonials-title" devName="Testimonials Title" devDescription="Testimonials section title" className="text-2xl font-semibold text-white mb-8">What Our Customers Say</H3>
+                <Div devId="testimonials-grid" devName="Testimonials Grid" devDescription="Grid of testimonial cards" className="grid md:grid-cols-2 gap-8">
+                  <Card devId="testimonial-1" devName="Testimonial 1" devDescription="First customer testimonial" className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                    <P devId="testimonial-1-text" devName="Testimonial 1 Text" devDescription="First testimonial text" className="text-gray-300 mb-4">"Geenius saved us $80,000 and 8 months of development time. Our restaurant app was live in 2 days!"</P>
+                    <P devId="testimonial-1-author" devName="Testimonial 1 Author" devDescription="First testimonial author" className="text-white font-semibold">- Maria Rodriguez, Restaurant Owner</P>
                   </Card>
-                  <Card className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-                    <P className="text-gray-300 mb-4">"The AI understood exactly what we needed. Our patient booking system works perfectly."</P>
-                    <P className="text-white font-semibold">- Dr. James Wilson, Medical Practice</P>
+                  <Card devId="testimonial-2" devName="Testimonial 2" devDescription="Second customer testimonial" className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                    <P devId="testimonial-2-text" devName="Testimonial 2 Text" devDescription="Second testimonial text" className="text-gray-300 mb-4">"The AI understood exactly what we needed. Our patient booking system works perfectly."</P>
+                    <P devId="testimonial-2-author" devName="Testimonial 2 Author" devDescription="Second testimonial author" className="text-white font-semibold">- Dr. James Wilson, Medical Practice</P>
                   </Card>
                 </Div>
               </Div>
@@ -825,65 +817,65 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Investment Opportunity Section */}
-        <Container componentId="investment-section">
-          <Section className="py-20 px-4 bg-black/20">
-            <Div className="container mx-auto">
+        <Container componentId="landing-investment-section">
+          <Section devId="investment-section-content" devName="Investment Section Content" devDescription="Investment section content" className="py-20 px-4 bg-black/20">
+            <Div devId="investment-container" devName="Investment Container" devDescription="Investment section container" className="container mx-auto">
               <H2 
-                devId="investment-title" 
-                devName="Investment Title" 
+                devId="investment-section-title" 
+                devName="Investment Section Title" 
                 devDescription="Investment opportunity section title"
                 className="text-5xl font-bold text-white text-center mb-16"
               >
                 Investment Opportunity
               </H2>
-              <Div className="grid md:grid-cols-2 gap-12">
-                <Div>
-                  <H3 className="text-3xl font-semibold text-white mb-6">Market Opportunity</H3>
-                  <Div className="space-y-4">
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">TAM (Total Addressable Market)</Span>
-                      <Span className="text-white font-bold">$280B</Span>
+              <Div devId="investment-content-grid" devName="Investment Content Grid" devDescription="Grid of investment content" className="grid md:grid-cols-2 gap-12">
+                <Div devId="market-opportunity-section" devName="Market Opportunity Section" devDescription="Market opportunity section">
+                  <H3 devId="market-opportunity-title" devName="Market Opportunity Title" devDescription="Market opportunity title" className="text-3xl font-semibold text-white mb-6">Market Opportunity</H3>
+                  <Div devId="market-opportunity-stats" devName="Market Opportunity Stats" devDescription="Market opportunity statistics" className="space-y-4">
+                    <Div devId="tam-stat" devName="TAM Stat" devDescription="Total addressable market statistic" className="flex justify-between items-center">
+                      <Span devId="tam-label" devName="TAM Label" devDescription="TAM label" className="text-gray-300">TAM (Total Addressable Market)</Span>
+                      <Span devId="tam-value" devName="TAM Value" devDescription="TAM value" className="text-white font-bold">$280B</Span>
                     </Div>
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">SAM (Serviceable Addressable Market)</Span>
-                      <Span className="text-white font-bold">$45B</Span>
+                    <Div devId="sam-stat" devName="SAM Stat" devDescription="Serviceable addressable market statistic" className="flex justify-between items-center">
+                      <Span devId="sam-label" devName="SAM Label" devDescription="SAM label" className="text-gray-300">SAM (Serviceable Addressable Market)</Span>
+                      <Span devId="sam-value" devName="SAM Value" devDescription="SAM value" className="text-white font-bold">$45B</Span>
                     </Div>
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">SOM (Serviceable Obtainable Market)</Span>
-                      <Span className="text-white font-bold">$2.3B</Span>
+                    <Div devId="som-stat" devName="SOM Stat" devDescription="Serviceable obtainable market statistic" className="flex justify-between items-center">
+                      <Span devId="som-label" devName="SOM Label" devDescription="SOM label" className="text-gray-300">SOM (Serviceable Obtainable Market)</Span>
+                      <Span devId="som-value" devName="SOM Value" devDescription="SOM value" className="text-white font-bold">$2.3B</Span>
                     </Div>
                   </Div>
                 </Div>
-                <Div>
-                  <H3 className="text-3xl font-semibold text-white mb-6">Use of Funds</H3>
-                  <Div className="space-y-4">
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">Product Development</Span>
-                      <Span className="text-white font-bold">40%</Span>
+                <Div devId="use-of-funds-section" devName="Use of Funds Section" devDescription="Use of funds section">
+                  <H3 devId="use-of-funds-title" devName="Use of Funds Title" devDescription="Use of funds title" className="text-3xl font-semibold text-white mb-6">Use of Funds</H3>
+                  <Div devId="use-of-funds-stats" devName="Use of Funds Stats" devDescription="Use of funds statistics" className="space-y-4">
+                    <Div devId="product-development-stat" devName="Product Development Stat" devDescription="Product development funding statistic" className="flex justify-between items-center">
+                      <Span devId="product-development-label" devName="Product Development Label" devDescription="Product development label" className="text-gray-300">Product Development</Span>
+                      <Span devId="product-development-value" devName="Product Development Value" devDescription="Product development value" className="text-white font-bold">40%</Span>
                     </Div>
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">Marketing & Sales</Span>
-                      <Span className="text-white font-bold">35%</Span>
+                    <Div devId="marketing-sales-stat" devName="Marketing Sales Stat" devDescription="Marketing and sales funding statistic" className="flex justify-between items-center">
+                      <Span devId="marketing-sales-label" devName="Marketing Sales Label" devDescription="Marketing and sales label" className="text-gray-300">Marketing & Sales</Span>
+                      <Span devId="marketing-sales-value" devName="Marketing Sales Value" devDescription="Marketing and sales value" className="text-white font-bold">35%</Span>
                     </Div>
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">Team Expansion</Span>
-                      <Span className="text-white font-bold">20%</Span>
+                    <Div devId="team-expansion-stat" devName="Team Expansion Stat" devDescription="Team expansion funding statistic" className="flex justify-between items-center">
+                      <Span devId="team-expansion-label" devName="Team Expansion Label" devDescription="Team expansion label" className="text-gray-300">Team Expansion</Span>
+                      <Span devId="team-expansion-value" devName="Team Expansion Value" devDescription="Team expansion value" className="text-white font-bold">20%</Span>
                     </Div>
-                    <Div className="flex justify-between items-center">
-                      <Span className="text-gray-300">Operations</Span>
-                      <Span className="text-white font-bold">5%</Span>
+                    <Div devId="operations-stat" devName="Operations Stat" devDescription="Operations funding statistic" className="flex justify-between items-center">
+                      <Span devId="operations-label" devName="Operations Label" devDescription="Operations label" className="text-gray-300">Operations</Span>
+                      <Span devId="operations-value" devName="Operations Value" devDescription="Operations value" className="text-white font-bold">5%</Span>
                     </Div>
                   </Div>
                 </Div>
               </Div>
               <Div 
-                devId="team-section" 
+                devId="cta-section" 
                 devName="Team Section" 
                 devDescription="Team members section"
                 className="mt-16"
               >
-                <H3 className="text-3xl font-semibold text-white text-center mb-8">Our Team</H3>
-                <Div className="grid md:grid-cols-4 gap-6">
+                <H3 devId="team-section-title" devName="Team Section Title" devDescription="Team section title" className="text-3xl font-semibold text-white text-center mb-8">Our Team</H3>
+                <Div devId="team-members-grid" devName="Team Members Grid" devDescription="Grid of team member cards" className="grid md:grid-cols-4 gap-6">
                   {teamMembers.map((member, index) => (
                     <Card 
                       key={index}
@@ -893,13 +885,16 @@ export const Landing: React.FC = () => {
                       className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center"
                     >
                       <Div 
+                        devId={`team-member-image-${index}`}
+                        devName={`Team Member Image ${index}`}
+                        devDescription={`Profile image for ${member.name}`}
                         className="w-20 h-20 mx-auto mb-4 rounded-full bg-cover bg-center"
                         style={{backgroundImage: `url(${member.image})`}}
                       />
-                      <H3 className="text-lg font-semibold text-white mb-1">{member.name}</H3>
-                      <P className="text-gray-300 text-sm mb-3">{member.role}</P>
+                      <H3 devId={`team-member-name-${index}`} devName={`Team Member Name ${index}`} devDescription={`Name for team member ${member.name}`} className="text-lg font-semibold text-white mb-1">{member.name}</H3>
+                      <P devId={`team-member-role-${index}`} devName={`Team Member Role ${index}`} devDescription={`Role for team member ${member.name}`} className="text-gray-300 text-sm mb-3">{member.role}</P>
                       <Button 
-                        devId={`linkedin-${index}`}
+                        devId={`team-member-linkedin-${index}`}
                         devName={`${member.name} LinkedIn`}
                         devDescription={`LinkedIn button for ${member.name}`}
                         variant="ghost" 
@@ -916,29 +911,29 @@ export const Landing: React.FC = () => {
         </Container>
 
         {/* Call to Action Section */}
-        <Container componentId="final-cta-section">
-          <Section className="py-20 px-4">
-            <Div className="container mx-auto text-center">
+        <Container componentId="landing-final-cta-section">
+          <Section devId="final-cta-section-content" devName="Final CTA Section Content" devDescription="Final CTA section content" className="py-20 px-4">
+            <Div devId="final-cta-container" devName="Final CTA Container" devDescription="Final CTA section container" className="container mx-auto text-center">
               <H2 
-                devId="final-cta-title" 
-                devName="Final CTA Title" 
+                devId="final-cta-section-title" 
+                devName="Final CTA Section Title" 
                 devDescription="Final call-to-action section title"
                 className="text-5xl font-bold text-white mb-8"
               >
                 Ready to Transform App Development?
               </H2>
-              <P className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+              <P devId="final-cta-description" devName="Final CTA Description" devDescription="Final CTA description text" className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
                 Join the revolution in app creation. Whether you're an investor, potential user, or partner, 
                 we'd love to show you what's possible.
               </P>
-              <Div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
+              <Div devId="final-cta-cards-grid" devName="Final CTA Cards Grid" devDescription="Grid of final CTA cards" className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <Card devId="investor-cta-card" devName="Investor CTA Card" devDescription="Call-to-action card for investors" className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
                   <Target className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-                  <H3 className="text-xl font-semibold text-white mb-4">For Investors</H3>
-                  <P className="text-gray-300 mb-6">Schedule a private demo and see our growth metrics</P>
+                  <H3 devId="investor-cta-title" devName="Investor CTA Title" devDescription="Investor CTA title" className="text-xl font-semibold text-white mb-4">For Investors</H3>
+                  <P devId="investor-cta-description" devName="Investor CTA Description" devDescription="Investor CTA description" className="text-gray-300 mb-6">Schedule a private demo and see our growth metrics</P>
                   <Input
-                    devId="investor-email"
-                    devName="Investor Email"
+                    devId="investor-email-input"
+                    devName="Investor Email Input"
                     devDescription="Email input for investors"
                     placeholder="Enter your email"
                     value={email}
@@ -946,8 +941,8 @@ export const Landing: React.FC = () => {
                     className="mb-4 bg-white/10 border-white/20 text-white"
                   />
                   <Button 
-                    devId="investor-cta"
-                    devName="Investor CTA"
+                    devId="investor-cta-button"
+                    devName="Investor CTA Button"
                     devDescription="Investor call-to-action button"
                     className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                   >
@@ -956,36 +951,36 @@ export const Landing: React.FC = () => {
                   </Button>
                 </Card>
                 
-                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
+                <Card devId="user-cta-card" devName="User CTA Card" devDescription="Call-to-action card for users" className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
                   <Users className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-                  <H3 className="text-xl font-semibold text-white mb-4">For Users</H3>
-                  <P className="text-gray-300 mb-6">Start building your app today with our free trial</P>
+                  <H3 devId="user-cta-title" devName="User CTA Title" devDescription="User CTA title" className="text-xl font-semibold text-white mb-4">For Users</H3>
+                  <P devId="user-cta-description" devName="User CTA Description" devDescription="User CTA description" className="text-gray-300 mb-6">Start building your app today with our free trial</P>
                   <Button 
-                    devId="user-cta"
-                    devName="User CTA"
+                    devId="user-cta-button"
+                    devName="User CTA Button"
                     devDescription="User call-to-action button"
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-4"
                   >
                     <Rocket className="w-4 h-4 mr-2" />
                     Try Free
                   </Button>
-                  <P className="text-gray-400 text-sm">No credit card required</P>
+                  <P devId="user-cta-note" devName="User CTA Note" devDescription="User CTA note text" className="text-gray-400 text-sm">No credit card required</P>
                 </Card>
                 
-                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
+                <Card devId="partner-cta-card" devName="Partner CTA Card" devDescription="Call-to-action card for partners" className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
                   <Globe className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                  <H3 className="text-xl font-semibold text-white mb-4">For Partners</H3>
-                  <P className="text-gray-300 mb-6">Join our ecosystem and grow together</P>
+                  <H3 devId="partner-cta-title" devName="Partner CTA Title" devDescription="Partner CTA title" className="text-xl font-semibold text-white mb-4">For Partners</H3>
+                  <P devId="partner-cta-description" devName="Partner CTA Description" devDescription="Partner CTA description" className="text-gray-300 mb-6">Join our ecosystem and grow together</P>
                   <Button 
-                    devId="partner-cta"
-                    devName="Partner CTA"
+                    devId="partner-cta-button"
+                    devName="Partner CTA Button"
                     devDescription="Partner call-to-action button"
                     className="w-full bg-green-600 hover:bg-green-700 text-white mb-4"
                   >
                     <Mail className="w-4 h-4 mr-2" />
                     Partner With Us
                   </Button>
-                  <P className="text-gray-400 text-sm">Integration opportunities</P>
+                  <P devId="partner-cta-note" devName="Partner CTA Note" devDescription="Partner CTA note text" className="text-gray-400 text-sm">Integration opportunities</P>
                 </Card>
               </Div>
             </Div>
@@ -994,51 +989,51 @@ export const Landing: React.FC = () => {
 
         {/* Footer */}
         <Footer 
-          devId="pitch-footer" 
-          devName="Pitch Footer" 
+          devId="landing-footer" 
+          devName="Landing Footer" 
           devDescription="Main footer with contact information"
           className="border-t border-white/10 py-12 px-4"
         >
-          <Div className="container mx-auto">
-            <Div className="grid md:grid-cols-4 gap-8">
-              <Div>
-                <Div className="flex items-center space-x-3 mb-4">
-                  <Div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+          <Div devId="footer-container" devName="Footer Container" devDescription="Footer content container" className="container mx-auto">
+            <Div devId="footer-content-grid" devName="Footer Content Grid" devDescription="Grid of footer content sections" className="grid md:grid-cols-4 gap-8">
+              <Div devId="footer-brand-section" devName="Footer Brand Section" devDescription="Footer brand section">
+                <Div devId="footer-brand-logo" devName="Footer Brand Logo" devDescription="Footer brand logo and name" className="flex items-center space-x-3 mb-4">
+                  <Div devId="footer-logo-icon" devName="Footer Logo Icon" devDescription="Footer logo icon" className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                     <Zap className="w-5 h-5 text-white" />
                   </Div>
-                  <Span className="text-xl font-bold text-white">Geenius Interactive</Span>
+                  <Span devId="footer-brand-name" devName="Footer Brand Name" devDescription="Footer brand name" className="text-xl font-bold text-white">Geenius Interactive</Span>
                 </Div>
-                <P className="text-gray-300">Transforming app development with AI-powered creation tools.</P>
+                <P devId="footer-brand-description" devName="Footer Brand Description" devDescription="Footer brand description" className="text-gray-300">Transforming app development with AI-powered creation tools.</P>
               </Div>
-              <Div>
-                <H3 className="text-white font-semibold mb-4">Product</H3>
-                <Div className="space-y-2">
-                  <P className="text-gray-300 hover:text-white cursor-pointer">Features</P>
-                  <P className="text-gray-300 hover:text-white cursor-pointer">Templates</P>
-                  <P className="text-gray-300 hover:text-white cursor-pointer">Pricing</P>
-                  <P className="text-gray-300 hover:text-white cursor-pointer">API</P>
-                </Div>
-              </Div>
-              <Div>
-                <H3 className="text-white font-semibold mb-4">Company</H3>
-                <Div className="space-y-2">
-                  <P className="text-gray-300 hover:text-white cursor-pointer">About</P>
-                  <P className="text-gray-300 hover:text-white cursor-pointer">Careers</P>
-                  <P className="text-gray-300 hover:text-white cursor-pointer">Press</P>
-                  <P className="text-gray-300 hover:text-white cursor-pointer">Contact</P>
+              <Div devId="footer-product-section" devName="Footer Product Section" devDescription="Footer product links section">
+                <H3 devId="footer-product-title" devName="Footer Product Title" devDescription="Footer product section title" className="text-white font-semibold mb-4">Product</H3>
+                <Div devId="footer-product-links" devName="Footer Product Links" devDescription="Footer product links" className="space-y-2">
+                  <P devId="footer-features-link" devName="Footer Features Link" devDescription="Footer features link" className="text-gray-300 hover:text-white cursor-pointer">Features</P>
+                  <P devId="footer-templates-link" devName="Footer Templates Link" devDescription="Footer templates link" className="text-gray-300 hover:text-white cursor-pointer">Templates</P>
+                  <P devId="footer-pricing-link" devName="Footer Pricing Link" devDescription="Footer pricing link" className="text-gray-300 hover:text-white cursor-pointer">Pricing</P>
+                  <P devId="footer-api-link" devName="Footer API Link" devDescription="Footer API link" className="text-gray-300 hover:text-white cursor-pointer">API</P>
                 </Div>
               </Div>
-              <Div>
-                <H3 className="text-white font-semibold mb-4">Connect</H3>
-                <Div className="space-y-2">
-                  <P className="text-gray-300">hello@geenius.ai</P>
-                  <P className="text-gray-300">+1 (555) 123-4567</P>
-                  <P className="text-gray-300">San Francisco, CA</P>
+              <Div devId="footer-company-section" devName="Footer Company Section" devDescription="Footer company links section">
+                <H3 devId="footer-company-title" devName="Footer Company Title" devDescription="Footer company section title" className="text-white font-semibold mb-4">Company</H3>
+                <Div devId="footer-company-links" devName="Footer Company Links" devDescription="Footer company links" className="space-y-2">
+                  <P devId="footer-about-link" devName="Footer About Link" devDescription="Footer about link" className="text-gray-300 hover:text-white cursor-pointer">About</P>
+                  <P devId="footer-careers-link" devName="Footer Careers Link" devDescription="Footer careers link" className="text-gray-300 hover:text-white cursor-pointer">Careers</P>
+                  <P devId="footer-press-link" devName="Footer Press Link" devDescription="Footer press link" className="text-gray-300 hover:text-white cursor-pointer">Press</P>
+                  <P devId="footer-contact-link" devName="Footer Contact Link" devDescription="Footer contact link" className="text-gray-300 hover:text-white cursor-pointer">Contact</P>
+                </Div>
+              </Div>
+              <Div devId="footer-connect-section" devName="Footer Connect Section" devDescription="Footer contact information section">
+                <H3 devId="footer-connect-title" devName="Footer Connect Title" devDescription="Footer connect section title" className="text-white font-semibold mb-4">Connect</H3>
+                <Div devId="footer-connect-info" devName="Footer Connect Info" devDescription="Footer contact information" className="space-y-2">
+                  <P devId="footer-email" devName="Footer Email" devDescription="Footer email address" className="text-gray-300">hello@geenius.ai</P>
+                  <P devId="footer-phone" devName="Footer Phone" devDescription="Footer phone number" className="text-gray-300">+1 (555) 123-4567</P>
+                  <P devId="footer-address" devName="Footer Address" devDescription="Footer address" className="text-gray-300">San Francisco, CA</P>
                 </Div>
               </Div>
             </Div>
-            <Div className="border-t border-white/10 mt-8 pt-8 text-center">
-              <P className="text-gray-400">© 2024 Geenius Interactive. All rights reserved. Built with ❤️ for the future of app development.</P>
+            <Div devId="footer-bottom" devName="Footer Bottom" devDescription="Footer bottom section with copyright" className="border-t border-white/10 mt-8 pt-8 text-center">
+              <P devId="footer-copyright" devName="Footer Copyright" devDescription="Footer copyright text" className="text-gray-400">© 2024 Geenius Interactive. All rights reserved. Built with ❤️ for the future of app development.</P>
             </Div>
           </Div>
         </Footer>

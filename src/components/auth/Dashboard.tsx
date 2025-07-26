@@ -5,20 +5,16 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
-import { Separator } from '../ui/separator';
 import { Input } from '../ui/input';
 import { 
   LogOut, 
-  User, 
   Mail, 
-  Calendar, 
   Shield, 
   Home, 
   BarChart3, 
   Users, 
   Target, 
   TrendingUp, 
-  DollarSign,
   Play,
   MessageSquare,
   Settings,
@@ -247,7 +243,7 @@ export const Dashboard: React.FC = () => {
     switch (activeTab) {
       case 'overview':
         return (
-          <Container componentId="overview-tab">
+          <Container componentId="dashboard-unauthorized">
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <Card>
@@ -350,7 +346,7 @@ export const Dashboard: React.FC = () => {
 
       case 'investors':
         return (
-          <Container componentId="investors-tab">
+          <Container componentId="dashboard-loading">
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">Investor Management</h3>
@@ -411,7 +407,7 @@ export const Dashboard: React.FC = () => {
 
       case 'demos':
         return (
-          <Container componentId="demos-tab">
+          <Container componentId="dashboard-unauthorized">
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">Demo Management</h3>
@@ -467,7 +463,7 @@ export const Dashboard: React.FC = () => {
 
       case 'metrics':
         return (
-          <Container componentId="metrics-tab">
+          <Container componentId="dashboard-loading">
             <div className="space-y-6">
               <h3 className="text-lg font-semibold">Business Metrics</h3>
               
@@ -527,7 +523,7 @@ export const Dashboard: React.FC = () => {
 
       case 'feedback':
         return (
-          <Container componentId="feedback-tab">
+          <Container componentId="dashboard-unauthorized">
             <div className="space-y-6">
               <h3 className="text-lg font-semibold">Customer Feedback</h3>
               
@@ -572,7 +568,7 @@ export const Dashboard: React.FC = () => {
 
       case 'settings':
         return (
-          <Container componentId="settings-tab">
+          <Container componentId="dashboard-loading">
             <div className="space-y-6">
               <h3 className="text-lg font-semibold">Dashboard Settings</h3>
               
@@ -622,7 +618,7 @@ export const Dashboard: React.FC = () => {
   };
 
   return (
-    <Container componentId="geenius-dashboard">
+    <Container componentId="dashboard-unauthorized">
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <Container componentId="dashboard-header">
@@ -663,7 +659,7 @@ export const Dashboard: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Sidebar */}
-            <Container componentId="dashboard-sidebar">
+            <Container componentId="dashboard-loading">
               <div className="lg:col-span-1">
                 <Card>
                   <CardHeader>
@@ -737,7 +733,7 @@ export const Dashboard: React.FC = () => {
             </Container>
 
             {/* Main Content */}
-            <Container componentId="dashboard-main">
+            <Container componentId="dashboard-loading">
               <div className="lg:col-span-3">
                 {renderTabContent()}
               </div>
